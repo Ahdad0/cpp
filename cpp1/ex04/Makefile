@@ -1,6 +1,6 @@
-NAME = Phonebook
+NAME = NO_SED
 
-SRCS = tests.cpp 
+SRCS = main.cpp
 
 CC = c++
 

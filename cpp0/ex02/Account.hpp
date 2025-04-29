@@ -18,7 +18,6 @@
 
 class Account {
 
-
 public:
 
 	typedef Account		t;
@@ -31,12 +30,11 @@ public:
 
 	Account( int initial_deposit );
 	~Account( void );
+	void	displayStatus( void ) const;
 
 	void	makeDeposit( int deposit );
 	bool	makeWithdrawal( int withdrawal );
 	int		checkAmount( void ) const;
-	void	displayStatus( void ) const;
-
 
 private:
 
