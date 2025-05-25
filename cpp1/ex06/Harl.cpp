@@ -34,8 +34,6 @@ void Harl::complain( std::string level )
             break;
         index++;
     }
-    // if (index == 4)
-    //     exit(1);
     void    (Harl::*func[4])() = {
         &Harl::debug,
         &Harl::info,

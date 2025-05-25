@@ -10,4 +10,6 @@ int main(int ac, char **av)
 
     if (ac == 2)
         obj.complain(av[1]);
+    else
+        std::cerr << "Just one argument!" << std::endl;
 }

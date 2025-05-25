@@ -10,7 +10,4 @@ Zombie::~Zombie()
     std::cout << name << ": is destroyed!" << std::endl;
 }
 
-Zombie::Zombie(std::string UserName)
-{
-    name = UserName;
-}
+Zombie::Zombie(std::string UserName) : name(UserName) {}

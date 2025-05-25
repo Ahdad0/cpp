@@ -1,14 +1,13 @@
 #include "Zombie.hpp"
 
-Zombie* zombieHorde( int N, std::string name )
+Zombie* zombieHorde( int N, std::string namee )
 {
+    int     i = 0;
     Zombie *zombies = new Zombie[N];
-    int i;
 
-    i = 0;
     while (i < N)
     {
-        zombies[i].SetName(name);
+        zombies[i].SetName(namee);
         i++;
     }
     return zombies;

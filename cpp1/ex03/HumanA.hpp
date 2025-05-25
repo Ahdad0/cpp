@@ -1,6 +1,4 @@
 #pragma once
-#ifndef HUMAN_A_H
-#define HUMAN_A_H
 
 #include <iostream>
 #include "Weapon.hpp"
@@ -16,5 +14,3 @@ class HumanA
         std::string type;
         std::string name;
 };
-
-#endif
