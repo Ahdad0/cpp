@@ -9,7 +9,7 @@ std::ostream& operator<<(std::ostream &os, const Fixed& obj)
 float Fixed::toFloat( void ) const
 {
     float num = static_cast<float>(fixed_point) / (1 << fractional_bits);
-    return num; 
+    return num;
 } 
 
 int Fixed::toInt( void ) const
@@ -26,7 +26,7 @@ Fixed::Fixed() : fixed_point(0), fractional_bits(8)
 Fixed::Fixed(const int num) : fractional_bits(8)
 {
     std::cout << "Int constructor called" << std::endl;
-    fixed_point = roundf(num * (1 << fractional_bits));
+    fixed_point = num * (1 << fractional_bits);
 }
 
 Fixed::Fixed(const float num) : fractional_bits(8)
