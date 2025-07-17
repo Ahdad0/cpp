@@ -3,12 +3,13 @@
 #include <iostream>
 #include "ICharacter.hpp"
 
-class CMateria : public AMateria
+class Cure : public AMateria
 {
-    protected:
+    private:
+        std::string type;
     public:
-        CMateria(std::string const & type);
+        Cure(std::string const & type);
         std::string const& getType() const; //Returns the materia type
-        virtual CMateria* clone() const = 0;
+        virtual Cure* clone() const = 0;
         virtual void use(ICharacter& target);
 };
