@@ -1,10 +1,11 @@
-NAME = AAnimal
+NAME = Inter
 
-SRCS = AAnimal.cpp main.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
+SRCS = AMateria.cpp Character.cpp Cure.cpp\
+		MateriaSource.cpp Ice.cpp main.cpp
 
 CC = c++
 
-FLAGS = -Wall -Wextra -Werror -std=c++98
+FLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
 all: $(NAME)
 

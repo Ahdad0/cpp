@@ -1,21 +1,16 @@
 #include "Cat.hpp"
 
-void    Cat::Set_typeCat()
+Cat::Cat() : Animal()
 {
-    type = "Cat";
-}
-
-Cat::Cat()
-{
+    type = "cat";
     brain = new Brain();
-    Set_typeCat();
     std::cout << "Constructor Cat is called!\n";
 }
 
 Cat::Cat(std::string str) : Animal(str)
 {
+    type = "cat";
     brain = new Brain(str);
-    Set_typeCat();
     std::cout << str << " Constructor Cat is called!\n";
 }
 
@@ -45,7 +40,8 @@ void Cat::makeSound() const
 
 Cat::~Cat()
 {
-    delete brain;
+    if (brain)
+        delete brain;
     std::cout << "Deconstructor Cat is called!\n";
 }
 

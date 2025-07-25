@@ -1,21 +1,16 @@
 #include "Dog.hpp"
 
-void    Dog::Set_typeDog()
+Dog::Dog() : Animal()
 {
-    type = "Dog";
-}
-
-Dog::Dog()
-{
+    type = "dog";
     brain = new Brain();
-    Set_typeDog();
     std::cout << "Constructor Dog is called!\n";
 }
 
 Dog::Dog(std::string str) : Animal(str)
 {
+    type = "dog";
     brain = new Brain(str);
-    Set_typeDog();
     std::cout << str << "Constructor Dog is called!\n";
 }
 
@@ -45,7 +40,8 @@ void Dog::makeSound() const
 
 Dog::~Dog()
 {
-    delete brain;
+    if (brain)
+        delete brain;
     std::cout << "Deconstructor Dog is called!\n";
 }
 
@@ -64,7 +60,7 @@ void    Dog::set_ideas(std::string str)
     int i = 0;
     while (i < 100)
     {
-        brain->ideas[i] =  str;
+        brain->ideas[i] = str;
         i++;
     }
 }

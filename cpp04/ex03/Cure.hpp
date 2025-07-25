@@ -5,11 +5,12 @@
 
 class Cure : public AMateria
 {
-    private:
-        std::string type;
     public:
+        Cure();
         Cure(std::string const & type);
-        std::string const& getType() const; //Returns the materia type
-        virtual Cure* clone() const = 0;
-        virtual void use(ICharacter& target);
+        Cure(const Cure& obj);
+        Cure& operator=(const Cure& obj);
+        ~Cure();
+        Cure* clone() const;
+        void use(ICharacter& target);
 };
