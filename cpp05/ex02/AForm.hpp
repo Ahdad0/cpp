@@ -18,7 +18,7 @@ class AForm
         AForm(std::string const name, int sign_grade, int execute_grade);
         AForm(const AForm& obj);
         AForm& operator=(const AForm& obj);
-        ~AForm();
+        virtual ~AForm();
 
         void    increment_grade();
         void    decrement_grade();

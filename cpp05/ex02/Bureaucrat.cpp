@@ -115,7 +115,8 @@ void Bureaucrat::signForm(AForm &obj)
 {
     try
     {
-        obj.beSigned(*this);
+        if (obj.get_CheckGrade() == false)
+            obj.beSigned(*this);
         if (obj.get_CheckGrade() == true)
         {
             std::cout << name << " signed " << obj.getName() << std::endl;

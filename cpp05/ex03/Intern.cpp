@@ -38,6 +38,5 @@ AForm* Intern::makeForm(std::string form_name, std::string target)
             delete tmp[i].concrete;
         i++;
     }
-    
     return ret;
 }

@@ -2,13 +2,15 @@
 
 int main()
 {
-    try
     {
-        Bureaucrat a;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << "throw an exception : " << e.what() << '\n';
+        try
+        {
+            Bureaucrat a;
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << "throw an exception : " << e.what() << '\n';
+        }
     }
     {
         try

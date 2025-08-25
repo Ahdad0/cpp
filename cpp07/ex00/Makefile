@@ -1,6 +1,6 @@
-NAME = AForm
+NAME = template
 
-SRCS = Bureaucrat.cpp main.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
+SRCS = main.cpp
 
 CC = c++
 

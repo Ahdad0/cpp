@@ -1,6 +1,6 @@
-NAME = Intern
+NAME = Array
 
-SRCS = Bureaucrat.cpp main.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
+SRCS = main.cpp
 
 CC = c++
 

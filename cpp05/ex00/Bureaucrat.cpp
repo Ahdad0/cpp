@@ -2,12 +2,12 @@
 
 Bureaucrat::Bureaucrat() : name("")
 {
-    this->grade = 150;
+    throw std::exception();
 }
 
-Bureaucrat::Bureaucrat(std::string const name, int grade) : name(name)
+Bureaucrat::Bureaucrat(std::string const name, int grade)
+    : name(name), grade(grade)
 {
-    this->grade = grade;
     try
     {
         if (grade < 1)

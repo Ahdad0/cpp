@@ -41,24 +41,10 @@ void AForm::beSigned(Bureaucrat &obj)
 {
     try
     {
-        std::cout << obj.getGrade() << "\n";
         if (obj.getGrade() > 150)
-        {
-            check_grade = false;
             throw Bureaucrat::GradeTooLowException();
-        }
-        else if (obj.getGrade() < 1)
-        {
-            check_grade = false;
-            throw Bureaucrat::GradeTooHighException();
-        }
-        else if (obj.getGrade() <= sign_grade && obj.getGrade() <= execute_grade)
+        else if (obj.getGrade() <= sign_grade)
             check_grade = true;
-    }
-    catch(Bureaucrat::GradeTooLowException& e)
-    {
-        std::cout << e.what() << std::endl;
-        throw std::exception();
     }
     catch(Bureaucrat::GradeTooHighException& e)
     {
@@ -86,7 +72,6 @@ int     AForm::get_executeGrade() const
 {
     return execute_grade;
 }
-
 
 void AForm::check_grades(int grade)
 {
