@@ -1,6 +1,6 @@
-NAME = btc
+NAME = PmergeMe
 
-SRCS = main.cpp BitcoinExchange.cpp
+SRCS = main.cpp PmergeMe.cpp
 
 CC = c++
 
@@ -8,7 +8,7 @@ FLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
 all: $(NAME)
 
-$(NAME): $(SRCS)
+$(NAME): $(SRCS) PmergeMe.hpp
 	$(CC) $(FLAGS) $(SRCS) -o $(NAME)
 
 fclean: clean

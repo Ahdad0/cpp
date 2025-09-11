@@ -1,5 +1,9 @@
 #include "BitcoinExchange.hpp"
 
+BitcoinExchange::BitcoinExchange()
+{
+}
+
 void BitcoinExchange::store_data(const char *file)
 {
     std::string str;
@@ -17,10 +21,27 @@ void BitcoinExchange::store_data(const char *file)
         if (std::getline(ss, date, ',') && ss >> value)
             data[date] = value;
     }
-    // for (std::map<std::string, double>::iterator it = data.begin(); it != data.end(); it++)
-    // {
-    //     std::cout << "first: " << it->first << " seconde: " << it->second << std::endl;
-    // }
+}
+
+int BitcoinExchange::compare_date(std::string data_date, std::string input_date)
+{
+    remove_whitespaces(data_date, '-');
+    remove_whitespaces(input_date, '-');
+
+    double first_date = 0;
+    double seconde_date = 0;
+
+    std::stringstream s(data_date);
+    s >> first_date;
+
+    std::stringstream ss(input_date);
+    ss >> seconde_date;
+
+    if (seconde_date > first_date)
+    {
+        return 0;
+    }
+    return 1;
 }
 
 void BitcoinExchange::print_data(const char *file)
@@ -36,17 +57,39 @@ void BitcoinExchange::print_data(const char *file)
     while (getline(ifile, str))
     {
         if (check_line(str, i) == 0)
-        {}
+        {
+            double v;
+            std::vector<std::string> tmp = parse_string(str, '|');
+            try
+            {
+                v = data.at(tmp[0]);
+                std::cout << date << " => " << input_value << " = " << v * input_value << std::endl;
+            }
+            catch(const std::exception& e)
+            {
+                std::map<std::string, double>::iterator it = data.end();
+                it--;
+                while (it != data.begin())
+                {
+                    if (compare_date(it->first, date) == 0)
+                    {
+                        std::cout << date << " => " << input_value << " = " << it->second * input_value << std::endl;
+                        break;
+                    }
+                    it--;
+                }
+            }
+        }
         i++;
     }
 }
 
-void BitcoinExchange::remove_whitespaces(std::string &str)
+void BitcoinExchange::remove_whitespaces(std::string &str, char c)
 {
     size_t i = 0;
     while (i < str.size())
     {
-        if (std::isspace(str[i]))
+        if (std::isspace(str[i]) || str[i] == c)
             str.erase(i, 1);
         else
             i++;
@@ -55,7 +98,7 @@ void BitcoinExchange::remove_whitespaces(std::string &str)
 
 std::vector<std::string> BitcoinExchange::parse_string(std::string str, char del)
 {
-    remove_whitespaces(str);
+    remove_whitespaces(str, ' ');
 
     std::vector<std::string> tmp;
     size_t f = 0;
@@ -73,22 +116,43 @@ std::vector<std::string> BitcoinExchange::parse_string(std::string str, char del
     return tmp;
 }
 
-int BitcoinExchange::check_numbers(std::string &str)
+int BitcoinExchange::check_numbers(std::string &str, int i)
 {
-    int i = 0;
-    while (str[i])
+    size_t ii = 0;
+    int cout = 0;
+    // std::cout << "first is: " << str[ii] << "\n";
+    while (str[ii])
     {
-        if (!std::isdigit(str[i]))
+        if (!std::isdigit(str[ii]) && (str[ii] != '.'))
+        {
+            if (i == 1 && (str[ii] == '-' || str[ii] == '+'))
+            {
+                if (!std::isdigit(str[ii + 1]) || std::isdigit(str[ii - 1]))
+                    return 1;
+                ii++;
+                continue;
+            }
             return 1;
-        i++;
+        }
+        if (str[ii] == '.' && str[ii + 1] == '.')
+            return 1;
+        if (ii == 0 && str[ii] == '.')
+            return 1;
+        if (ii + 1 == str.size() && str[ii] == '.')
+            return 1;
+        if (str[ii] == '.')
+            cout++;
+        ii++;
     }
+    if (cout > 1)
+        return 1;
     return 0;
 }
 
 int BitcoinExchange::check_line(std::string str, int i)
 {
     std::vector<std::string> tmp_str = parse_string(str, '|');
-    if (tmp_str.size() == 0)
+    if (tmp_str.size() != 2)
         return error_bad_input(str);
 
     if (i == 0)
@@ -98,9 +162,11 @@ int BitcoinExchange::check_line(std::string str, int i)
     }
     else
     {
+        // year-month-day
+        date = tmp_str[0];
         std::vector<std::string> year = parse_string(tmp_str[0], '-');
-        if (year.size() != 3 || check_numbers(year[0]) == 1
-            || check_numbers(year[1]) == 1 || check_numbers(year[2]) == 1)
+        if (year.size() != 3 || check_numbers(year[0], 0) == 1
+            || check_numbers(year[1], 0) == 1 || check_numbers(year[2], 0) == 1)
             return error_bad_input(str);
         
         int y;
@@ -129,8 +195,24 @@ int BitcoinExchange::check_line(std::string str, int i)
             return error_bad_input(str);
         if (m == 2 && d > 29)
             return error_bad_input(str);
-
-        // year
+        
+        if (check_numbers(tmp_str[1], 1) == 1)
+            return error_bad_input(str);
+        double v;
+        std::stringstream vv(tmp_str[1]);
+        vv >> v;
+        if (v < 0)
+        {
+            std::cout << "Error: not a positive number." << std::endl;
+            return 1;
+        }
+        if (v > INT_MAX)
+        {
+            std::cout << "Error: too large a number." << std::endl;
+            return 1;
+        }
+        input_value = v;
+        // if ()
     }
     // size_t i = 0;
     // while (i < tmp_str.size())
